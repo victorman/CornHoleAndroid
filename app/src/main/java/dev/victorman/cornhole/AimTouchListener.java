@@ -26,7 +26,7 @@ public class AimTouchListener implements View.OnTouchListener {
                 break;
         }
 
-        view.invalidate();
+//        view.invalidate();
 
         return true;
     }

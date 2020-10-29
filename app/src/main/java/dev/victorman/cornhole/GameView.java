@@ -113,17 +113,18 @@ public class GameView extends View {
     }
 
     private void update() {
+        List<Ball> removeList = new ArrayList<Ball>();
         for(Ball ball: balls) {
             ball.update();
             if(ball.intersects(cornHoleBoard.getRect())) {
                 score++;
-                balls.remove(ball);
                 ball.setSpeed(ball.dx, 0f);
                 ball.ay = 0f;
                 goalBalls.add(ball);
+                removeList.add(ball);
             }
             if(ball.y > getBottom()) {
-                balls.remove(ball);
+                removeList.add(ball);
             }
         }
 
@@ -132,6 +133,11 @@ public class GameView extends View {
             ball.update();
             ball.ay = 0f;
         }
+
+        for (Ball ball: removeList) {
+            balls.remove(ball);
+        }
+        removeList.clear();
     }
 
     private void drawAim(Canvas canvas) {
